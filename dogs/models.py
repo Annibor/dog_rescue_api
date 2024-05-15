@@ -14,6 +14,7 @@ class Dog(models.Model):
     description (TextField): A detailed description of the dog.
     gender (CharField): The gender of the dog.
     good_with_children (BooleanField): True if the dog is known to be good with children, False otherwise.
+    adoption_status (CharField): The current adoption status of the dog, with choices of 'available', 'pending', or 'adopted'.
     """
   name = models.CharField(max_length=80)
   breed = models.CharField(max_length=80)
@@ -22,6 +23,8 @@ class Dog(models.Model):
   description = models.TextField()
   gender = models.CharField(max_length=10)
   good_with_children = models.BooleanField(default=True)
+  adoption_status = models.CharField(max_length=20, choices=[('available', 'Available'), ('pending', 'Pending'), ('adopted', 'Adopted')], default='available')
+
 
   class Meta:
     """
