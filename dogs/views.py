@@ -9,7 +9,7 @@ class DogsListView(APIView):
   List of all dogs available for adoption.
   """
 
-  def get(self.request):
+  def get(self, request):
     dogs = Dog.objects.all()
     serializer = DogSerializer(dogs, many=True)
     return Response(serializer.data)
