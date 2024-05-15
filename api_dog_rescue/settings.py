@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "cloudinary_storage",
     "cloudinary",
     "account",
+    "dogs",
 ]
 
 MIDDLEWARE = [
