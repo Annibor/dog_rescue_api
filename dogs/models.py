@@ -23,5 +23,19 @@ class Dog(models.Model):
   gender = models.CharField(max_length=10)
   good_with_children = models.BooleanField(default=True)
 
+  class Meta:
+    """
+    Metadata for the Dog model.
+    
+    Attributes:
+      verbose_name: A human-readable name for the model used in the Django admin.
+      verbose_name_plural: A human-readable name for the model in plural form.
+      ordering: The default sorting order for queries, based on the dog's name.
+    
+    """
+    verbose_name = "Dog"
+    verbose_name_plural = "Dogs"
+    ordering = ["name"]
+
   def __str__(self):
      return self.name
