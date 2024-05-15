@@ -26,7 +26,21 @@ class UserProfile(models.Model):
   last_name = models.CharField(max_length=60)
   email = models.EmailField(unique=True, blank=False)
   phone_number = models.CharField(max_length=20, blank=True, null=True)
-  liked_dogs = models.ManyToManyField('Dog', related_name='liked_by_users')
+ # liked_dogs = models.ManyToManyField('Dog', related_name='liked_by_users')
+
+  class Meta:
+    """
+    Metadata for the UserProfile model.
+    
+    Attributes:
+      verbose_name: A human-readable name for the model used in the Django admin.
+      verbose_name_plural: A human-readable name for the model in plural form.
+      ordering: The default sorting order for queries,  based on last_name and first_name.
+    
+    """
+    verbose_name = "User Profile"
+    verbose_name_plural = "User Profiles"
+    ordering = ["last_name", "first_name"]
   
   def __str__(self):
         return f"{self.user}'s profile"
