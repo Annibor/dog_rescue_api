@@ -14,7 +14,7 @@ class UserProfileView(APIView):
 
   permission_classes = [IsAuthenticated]
 
-  def get_permissions(self, request):
+  def get(self, request):
     """
     Retrive the UserProfile for the logged in user
     """
