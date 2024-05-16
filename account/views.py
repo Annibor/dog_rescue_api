@@ -3,6 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .serializers import UserProfileSerializer
+from dogs.serializers import DogsSerializer
 from rest_framework import status
 from .models import UserProfile
 # Create your views here.
@@ -34,3 +35,17 @@ class UserProfileView(APIView):
  #     serializer.save()
 #      return Response(serializer.data)
  #   return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserLikedDogsView(APIView):
+  permission_classes = [IsAuthenticated]
+
+  def get(self, request):
+    """
+    Retrieve the list of dogs liked by the logged in user
+    """
+    user_profile = get_object_or_404(UserProfile, user=request.user)
+    liked_dogs = user_profile.liked_dogs.all()
+    serializer = DogsSerializer(user_profile.liked_dogs, many=True)
+    return Response(serializer.data)
+  
