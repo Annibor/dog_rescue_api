@@ -26,7 +26,7 @@ class UserProfile(models.Model):
   last_name = models.CharField(max_length=60)
   email = models.EmailField(unique=True, blank=False)
   phone_number = models.CharField(max_length=20, blank=True, null=True)
- # liked_dogs = models.ManyToManyField('Dog', related_name='liked_by_users')
+  liked_dogs = models.ManyToManyField('dogs.Dog', related_name='liked_by_users', blank=True)
 
   class Meta:
     """
