@@ -24,3 +24,5 @@ class DogDetailView(APIView):
     dog = get_object_or_404(Dog, pk=pk)
     serializer = DogSerializer(dog)
     return Response(serializer.data)
+
+class Post
