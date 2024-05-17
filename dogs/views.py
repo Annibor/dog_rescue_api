@@ -20,8 +20,8 @@ class DogsListView(generics.ListAPIView):
   queryset = Dog.objects.all()
   serializer_class = DogsSerializer
   filter_backends = [DjangoFilterBackend, filters.SearchFilter]
-  filterset_fields = ['name', 'breed', 'age', 'gender', 'good_with_children']
-  search_fields = ['name', 'breed', 'age', 'gender', 'good_with_children']
+  filterset_fields = ['name', 'breed', 'age', 'gender', 'good_with_children', 'good_with_other_dogs']
+  search_fields = ['name', 'breed', 'age', 'gender', 'good_with_children', 'good_with_other_dogs']
   
     
 class DogDetailView(APIView):
