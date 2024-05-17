@@ -26,6 +26,12 @@ class UserProfile(models.Model):
   last_name = models.CharField(max_length=60)
   email = models.EmailField(unique=True, blank=False)
   phone_number = models.CharField(max_length=20, blank=True, null=True)
+  address = models.CharField(max_length=255, blank=True, null=True)
+  city = models.CharField(max_length=100, blank=True, null=True)
+  state = models.CharField(max_length=100, blank=True, null=True)
+  zip_code = models.CharField(max_length=10, blank=True, null=True)
+  has_other_pets = models.BooleanField(default=False)
+  has_children = models.BooleanField(default=False)
   liked_dogs = models.ManyToManyField('dogs.Dog', related_name='liked_by_users', blank=True)
 
   class Meta:
@@ -44,4 +50,7 @@ class UserProfile(models.Model):
   
   def __str__(self):
         return f"{self.user}'s profile"
+  
+
+
 
