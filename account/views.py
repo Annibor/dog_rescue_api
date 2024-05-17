@@ -62,5 +62,25 @@ class AdoptionApplicationListView(APIView):
     user = self.request.user
     return AdoptionApplication.objects.all.filter(user=user).order_by('created_at')
   
-  
+  def perform_create(self, serializer):
+    """
+    Add the application to the list of applications that the current user has submitted
+    """
+    serializer.save(user=self.request.user)
+
+
+class AdoptionApplicationDetailView(APIView):
+  quesryset = AdoptionApplication.objects.all()
+  serializer_class = AdoptionApplicationSerializer
+  permission_classes = [IsAuthenticated]
+
+  def get_queryset(self):
+    """
+    Users can only view AdoptionApplications that they have submitted.
+    And staff users can view all applications.
+    """
+    user = self.request.user
+    if user.is_staff:
+      return AdoptionApplication.objects.all().order_by('created_at')
+    return AdoptionApplication.objects.filter(user=user)
   
