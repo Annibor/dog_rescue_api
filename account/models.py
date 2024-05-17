@@ -49,8 +49,24 @@ class UserProfile(models.Model):
     ordering = ["last_name", "first_name"]
   
   def __str__(self):
-        return f"{self.user}'s profile"
+    return f"{self.user}'s profile"
   
 
+class AdoptionApplication(models.Model):
+  user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+  dog = models.ForeignKey('dogs.Dog', on_delete=models.CASCADE)
+  visit_date = models.DateField()
+  status = models.CharField(max_length=20, choices=[('pending', 'Pending'), ('scheduled', 'Scheduled'), ('completed', 'Completed'), ('cancelled', 'Cancelled')], default='pending')
+  created_at = models.DateTimeField(auto_now_add=True)
+  updated_at = models.DateTimeField(auto_now=True)
+
+  class Meta:
+    verbose_name = "Adoption Application"
+    verbose_name_plural = "Adoption Applications"
+    ordering = ["-created_at"]
+    unique_together = ("user", "dog", "status")
+
+  def __str__(self):
+    return f"Apllication by {self.user.get_full_name()} for {self.dog.name}"
 
 
