@@ -53,6 +53,21 @@ class UserProfile(models.Model):
   
 
 class AdoptionApplication(models.Model):
+  """
+  Represents a user's application to adopt a dog.
+
+  Attributes:
+    user (ForeignKey): A link to the user submitting the application.
+    dog (ForeignKey): A link to the dog being applied for.
+    visit_date (DateField): The date the user plans to visit the dog.
+    status (CharField): The status of the application, with choices of 'pending', 'scheduled', 'completed', or 'cancelled'.
+    created_at (DateTimeField): The date and time the application was created.
+    updated_at (DateTimeField): The date and time the application was last updated.
+
+  Methods:
+    __str__: Returns a string representation of the AdoptionApplication, which includes the
+      user's full name and the dog's name.
+  """
   user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
   dog = models.ForeignKey('dogs.Dog', on_delete=models.CASCADE)
   visit_date = models.DateField()
@@ -61,6 +76,15 @@ class AdoptionApplication(models.Model):
   updated_at = models.DateTimeField(auto_now=True)
 
   class Meta:
+    """
+    Meta data for the AdoptionApplication model.
+
+    Attributes:
+      verbose_name: A human-readable name for the model used in the Django admin.
+      verbose_name_plural: A human-readable name for the model in plural form.
+      ordering: The default sorting order for queries, based on the created_at field.
+      unique_together: Ensures that each user can only have one application per dog with a given status.
+    """
     verbose_name = "Adoption Application"
     verbose_name_plural = "Adoption Applications"
     ordering = ["-created_at"]
