@@ -22,7 +22,7 @@ class AdoptionApplicationSerializer(serializers.ModelSerializer):
     if self.instance is None:
       active_status = ['pending', 'scheduled']
       existing_applications = AdoptionApplication.objects.filter(
-        user= data['user'], dog= sata['dog'], status__in=active_status
+        user= data['user'], dog= data['dog'], status__in=active_status
       )
       if existing_applications.exists():
         raise serializers.ValidationError("You have already applied for this dog.")
